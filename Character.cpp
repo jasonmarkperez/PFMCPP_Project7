@@ -71,6 +71,7 @@ int Character::takeDamage(int damage)
     {
         armor -= damage;
     }
+
     else
     {
         damage -= armor;
@@ -92,14 +93,15 @@ void Character::attackInternal(Character& other)
 {
     if( other.hitPoints <= 0 )
     {
-        /*
-        When you defeat another Character: 
-            a) your stats are restored to their initial value
-            b) your stats are boosted 10%
-            c) the initial value of your stats is updated to reflect this boosted stat for the next time you defeat another character.
-      */
-        // assert(false);
-        std::cout << getName() << " defeated " << other.getName() << " and leveled up!" << std::endl;        
+        armor = *initialArmorLevel + int(armor * 0.1);
+        hitPoints = *initialHitPoints + int(hitPoints * 0.1);
+        /* stats are restored to their initial value and boosted by 10% */
+
+        *initialArmorLevel = armor;
+        *initialHitPoints = hitPoints;
+        /* the initial value of your stats is updated to reflect this boosted stat for the next time you defeat another character.*/
+
+        std::cout << getName() << " defeated " << other.getName() << " and leveled up!" << std::endl;
     }
 }
 

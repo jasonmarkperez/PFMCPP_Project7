@@ -62,6 +62,7 @@ protected:
     bool isDefending = false;
 private:
     std::unique_ptr<int> initialHitPoints, initialArmorLevel, initialAttackDamage;
+    //why makes these pointers?
     
     void attackInternal(Character& other);
 };
