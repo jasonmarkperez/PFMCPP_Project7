@@ -93,8 +93,8 @@ void Character::attackInternal(Character& other)
 {
     if( other.hitPoints <= 0 )
     {
-        armor = *initialArmorLevel + int(armor * 0.1);
-        hitPoints = *initialHitPoints + int(hitPoints * 0.1);
+        armor = *initialArmorLevel + getArmorLevel()/100*10;
+        hitPoints = *initialHitPoints + getHP()/100*10;
         /* stats are restored to their initial value and boosted by 10% */
 
         *initialArmorLevel = armor;
@@ -108,10 +108,11 @@ void Character::attackInternal(Character& other)
 void Character::printStats()
 {
     std::cout << getName() << "'s stats: " << std::endl;
-    // assert(false);
     /*
     make your getStats() use a function from the Utility.h
+    I think this was already done. Each derived class is calling getCharacterStats from utility.h?
     */
+
     std::cout << getStats(); 
     
     std::cout << std::endl;
