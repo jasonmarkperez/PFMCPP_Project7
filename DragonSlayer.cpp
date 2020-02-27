@@ -22,9 +22,11 @@ std::string DragonSlayer::getStats()
 void DragonSlayer::attack(Character& other)
 {
     std::cout << name << " is attacking " << other.getName() << " !!" << std::endl;
+
+
     if( auto* dragon = dynamic_cast<Dragon*>(&other) )
-    {        
-        attackItem.use(&other);
+    {   
+        attackItem.use(this);
         
         while( dragon->getHP() > 0 )
         {
