@@ -68,6 +68,7 @@ int main()
     paladin.defend();
     dragon.attack( paladin );
     dwarf.attack( dragon );
+    dragon.attack( dwarf );
     paladin.attack( dragon ); //can't, he's dead
     
     dragonSlayer.help( paladin ); //now he's not dead

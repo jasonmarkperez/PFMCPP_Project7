@@ -1,6 +1,7 @@
 #include "Character.h"
 #include <iostream>
 #include <vector>
+#include <cassert>
 
 #include "DefensiveItem.h"
 #include "HelpfulItem.h"
@@ -70,6 +71,7 @@ int Character::takeDamage(int damage)
     {
         armor -= damage;
     }
+
     else
     {
         damage -= armor;
@@ -87,29 +89,33 @@ int Character::takeDamage(int damage)
 }
 
 
-#include <assert>
 void Character::attackInternal(Character& other)
 {
     if( other.hitPoints <= 0 )
     {
-        /*
-        When you defeat another Character: 
-            a) your stats are restored to their initial value
-            b) your stats are boosted 10%
-            c) the initial value of your stats is updated to reflect this boosted stat for the next time you defeat another character.
-      */
-        assert(false);
-        std::cout << getName() << " defeated " << other.getName() << " and leveled up!" << std::endl;        
+
+        /* stats are restored to their initial value and boosted by 10% */
+
+        armor = *initialArmorLevel * 1.1f;
+        *initialArmorLevel = armor;
+
+        hitPoints = *initialHitPoints * 1.1f;
+        *initialHitPoints = hitPoints;
+
+        /* the initial value of your stats is updated to reflect this boosted stat for the next time you defeat another character.*/
+
+        std::cout << getName() << " defeated " << other.getName() << " and leveled up!" << std::endl;
     }
 }
 
 void Character::printStats()
 {
     std::cout << getName() << "'s stats: " << std::endl;
-    assert(false);
     /*
     make your getStats() use a function from the Utility.h
+    I think this was already done. Each derived class is calling getCharacterStats from utility.h?
     */
+
     std::cout << getStats(); 
     
     std::cout << std::endl;
