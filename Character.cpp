@@ -93,18 +93,14 @@ void Character::attackInternal(Character& other)
 {
     if( other.hitPoints <= 0 )
     {
-        armor = *initialArmorLevel + getArmorLevel()/100*10; 
-        hitPoints = *initialHitPoints + getHP()/100*10;
 
         /* stats are restored to their initial value and boosted by 10% */
 
-        float boostedArmorLevel, boostedHitPoints;
+        armor = *initialArmorLevel * 1.1f;
+        *initialArmorLevel = armor;
 
-        boostedArmorLevel = *initialArmorLevel * 1.1f;
-        *initialArmorLevel = boostedArmorLevel;
-
-        boostedHitPoints = *initialHitPoints * 1.1f;
-        *initialHitPoints = boostedHitPoints;
+        hitPoints = *initialHitPoints * 1.1f;
+        *initialHitPoints = hitPoints;
 
         /* the initial value of your stats is updated to reflect this boosted stat for the next time you defeat another character.*/
 
